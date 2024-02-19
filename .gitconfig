@@ -1,0 +1,19 @@
+[user]
+	name = philip82148
+	email = 92205270+philip82148@users.noreply.github.com
+[alias]
+    a = add
+    c = commit
+    cm = commit -m
+    ad = commit --amend
+    adm = commit --amend -m
+    b = branch
+    co = checkout
+    cob = checkout -b
+    l = log
+    lp = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
+    lpn = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset' --name-status
+    sl = stash list
+    su = stash -u
+    svu = stash save -u
+    sp = stash pop
