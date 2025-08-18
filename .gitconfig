@@ -5,7 +5,7 @@
     a = add
     c = commit
     cm = commit -m
-    ad = commit --amend
+    ad = commit --amend --no-edit
     adm = commit --amend -m
     b = branch
     co = checkout
@@ -15,5 +15,11 @@
     lpn = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset' --name-status
     sl = stash list
     su = stash -u
+    suk = stash -uk
     svu = stash save -u
     sp = stash pop
+    ri = rebase -i
+    rc = rebase --continue
+    ra = rebase --abort
+[init]
+	defaultBranch = main
