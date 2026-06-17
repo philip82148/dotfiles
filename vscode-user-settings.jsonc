@@ -55,6 +55,10 @@
     // 改行をなくす (Ctrl + j で行連結)
     { "before": ["<C-j>"], "after": ["J"] },
 
+    // インデント (VSCode標準のインデントコマンドを割り当て)
+    { "before": [">"], "commands": ["editor.action.indentLines"] },
+    { "before": ["<"], "commands": ["editor.action.outdentLines"] },
+
     // その他の操作 (エディタを閉じる / コード整形 / 検索ハイライト消去)
     {
       "before": ["<Leader>", "w"],
