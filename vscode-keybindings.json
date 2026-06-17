@@ -1,75 +1,75 @@
 [
   {
     "key": "ctrl+h",
-    "command": "workbench.action.previousEditor",
+    "command": "workbench.action.previousEditor"
   },
   {
     "key": "ctrl+l",
-    "command": "workbench.action.nextEditor",
+    "command": "workbench.action.nextEditor"
   },
   {
     "key": "ctrl+j",
     "command": "selectNextSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
   },
   {
     "key": "ctrl+k",
     "command": "selectPrevSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
   },
   {
     "key": "ctrl+j",
     "command": "workbench.action.quickOpenSelectNext",
-    "when": "inQuickOpen",
+    "when": "inQuickOpen"
   },
   {
     "key": "ctrl+k",
     "command": "workbench.action.quickOpenSelectPrevious",
-    "when": "inQuickOpen ",
+    "when": "inQuickOpen"
   },
   {
     "key": "ctrl+t",
     "command": "workbench.action.terminal.toggleTerminal",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus"
   },
   {
     "key": "ctrl+t",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "terminalFocus",
+    "when": "terminalFocus"
   },
   {
     "key": "shift+enter",
-    "when": "inputFocus && vim.mode != 'Viual",
-    "command": "editor.action.insertLineBefore",
+    "when": "inputFocus && vim.mode != 'Visual'",
+    "command": "editor.action.insertLineBefore"
   },
   {
     "key": "shift+enter",
     "command": "-python.execInREPL",
-    "when": "config.python.REPL.sendToNativeREPL && editorTextFocus && !isCompositeNotebook && !jupyter.ownsSelection && !notebookEditorFocused && editorLangId == 'python'",
+    "when": "config.python.REPL.sendToNativeREPL && editorTextFocus && !isCompositeNotebook && !jupyter.ownsSelection && !notebookEditorFocused && editorLangId == 'python'"
   },
   {
     "key": "shift+enter",
     "command": "-python.execSelectionInTerminal",
-    "when": "editorTextFocus && !findInputFocussed && !isCompositeNotebook && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'",
+    "when": "editorTextFocus && !findInputFocussed && !isCompositeNotebook && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'"
   },
   {
     "key": "j",
     "command": "list.focusDown",
-    "when": "listFocus && !inputFocus",
+    "when": "listFocus && !inputFocus"
   },
   {
     "key": "k",
     "command": "list.focusUp",
-    "when": "listFocus && !inputFocus",
+    "when": "listFocus && !inputFocus"
   },
   {
     "key": "h",
     "command": "list.collapse",
-    "when": "listFocus && !inputFocus",
+    "when": "listFocus && !inputFocus"
   },
   {
     "key": "l",
     "command": "list.select",
-    "when": "listFocus && !inputFocus",
-  },
+    "when": "listFocus && !inputFocus"
+  }
 ]
