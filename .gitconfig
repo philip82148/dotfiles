@@ -13,10 +13,12 @@
     l = log
     lp = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
     lpn = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset' --name-status
+    s = stash
     sl = stash list
     su = stash -u
+    sum = stash -um
     suk = stash -uk
-    svu = stash save -u
+    sukm = stash -ukm
     sp = stash pop
     ri = rebase -i
     rc = rebase --continue
