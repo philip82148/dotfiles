@@ -1,0 +1,127 @@
+{
+  "window.autoDetectColorScheme": true,
+  "redhat.telemetry.enabled": true,
+  "workbench.activityBar.orientation": "vertical",
+  "workbench.preferredLightColorTheme": "Default Dark Modern",
+  "jdk.telemetry.enabled": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "black-formatter.args": ["--line-length", "119"],
+  "isort.args": ["--profile", "black", "--line-length", "119"],
+  "flake8.args": ["--extend-ignore", "E203", "--max-line-length", "119"],
+  "code-runner.runInTerminal": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+  },
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+
+  // =============================================================================
+  // 1. 基本設定 (General Settings)
+  // =============================================================================
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "editor.lineNumbers": "relative",
+  "vim.leader": "<space>",
+
+  // =============================================================================
+  // 2. ノーマルモード設定 (Normal Mode Keybindings)
+  // =============================================================================
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // ページ移動 (大文字 J / K で半画面スクロール)
+    { "before": ["J"], "after": ["<C-d>"] },
+    { "before": ["K"], "after": ["<C-u>"] },
+
+    // 行内移動 (大文字 L / H で行末 / 行頭)
+    { "before": ["L"], "after": ["$"] },
+    { "before": ["H"], "after": ["^"] },
+
+    // 対応するカッコへの移動
+    { "before": ["M"], "after": ["%"] },
+
+    // undo/redo (大文字 U でリドゥ)
+    { "before": ["u"], "commands": ["undo"] },
+    { "before": ["U"], "commands": ["redo"] },
+
+    // 削除でレジスタを汚さないようにする
+    { "before": ["x"], "after": ["\"", "_", "x"] },
+    { "before": ["s"], "after": ["\"", "_", "d"] },
+    { "before": ["S"], "after": ["\"", "_", "D"] },
+    { "before": ["s", "s"], "after": ["\"", "_", "d", "d"] },
+
+    // 改行 (Enterで下に空行挿入)
+    { "before": ["<Enter>"], "commands": ["editor.action.insertLineAfter"] },
+
+    // 改行をなくす (Ctrl + j で行連結)
+    { "before": ["<C-j>"], "after": ["J"] },
+
+    // その他の操作 (エディタを閉じる / コード整形 / 検索ハイライト消去)
+    {
+      "before": ["<Leader>", "w"],
+      "commands": ["workbench.action.closeActiveEditor"],
+    },
+    {
+      "before": ["<Leader>", "f"],
+      "commands": ["editor.action.formatDocument"],
+    },
+    { "before": ["<Leader>", "z"], "commands": [":noh"] },
+    {
+      "before": ["f"],
+      "after": ["leader", "leader", "leader", "b", "d", "w"],
+    },
+  ],
+
+  // =============================================================================
+  // 3. インサートモード設定 (Insert Mode Keybindings)
+  // =============================================================================
+  "vim.insertModeKeyBindingsNonRecursive": [
+    { "before": ["j", "j"], "after": ["<Esc>"] },
+    { "before": [";", ";"], "commands": ["editor.action.triggerSuggest"] },
+  ],
+
+  // =============================================================================
+  // 4. ビジュアルモード設定 (Visual Mode Keybindings)
+  // =============================================================================
+  "vim.visualModeKeyBindingsNonRecursive": [
+    { "before": ["<Leader>", "j"], "after": ["<Esc>"] },
+
+    // ページ移動 (大文字 J / K で半画面スクロール)
+    { "before": ["J"], "after": ["<C-d>"] },
+    { "before": ["K"], "after": ["<C-u>"] },
+
+    // 行内移動 (大文字 L / H で行末 / 行頭)
+    { "before": ["L"], "after": ["$"] },
+    { "before": ["H"], "after": ["^"] },
+
+    // カーソル移動 (ジャンプリストの戻る / 進む)
+    { "before": ["<C-u>"], "after": ["<C-o>"] },
+    { "before": ["<C-r>"], "after": ["<C-i>"] },
+
+    // 対応するカッコへの移動
+    { "before": ["M"], "after": ["%"] },
+
+    // ペーストでレジスタを汚さないようにする
+    { "before": ["p"], "after": ["\"", "_", "d", "P"] },
+
+    // インデント (VSCode標準のインデントコマンドを割り当て)
+    { "before": [">"], "commands": ["editor.action.indentLines"] },
+    { "before": ["<"], "commands": ["editor.action.outdentLines"] },
+  ],
+
+  // =============================================================================
+  // 5. プラグイン機能設定 (Built-in Plugin Settings)
+  // =============================================================================
+  "vim.easymotion": true,
+  "vim.visualstar": true,
+  "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.color": "rgba(100, 170, 240, 0.5)",
+  "vim.highlightedyank.duration": 150,
+  "vim.handleKeys": {
+    "<C-c>": false,
+    "<C-v>": false,
+    "<C-x>": false,
+    "<C-f>": false,
+    "<C-a>": false,
+    "<C-p>": false,
+  },
+}
