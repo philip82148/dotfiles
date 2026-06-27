@@ -1,0 +1,6 @@
+require('basic_config')
+require('keybindings')
+require('config.lazy')
+require('config.lsp')
+require('config.toggle_term')
+require('config.barbar')
