@@ -90,4 +90,17 @@ return {{
         "<cmd>VenvSelect<cr>",
         desc = "Select Virtual Environment"
     }}
+}, {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    keys = {{
+        "f",
+        mode = {"n", "x"},
+        function()
+            require("flash").jump()
+        end,
+        desc = "Flash"
+    }}
 }}
