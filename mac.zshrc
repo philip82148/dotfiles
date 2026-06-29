@@ -6,7 +6,7 @@ unset LC_ALL
 # ========================
 # Editor
 # ========================
-export EDITOR=vim
+export EDITOR=nvim
 # ========================
 # History
 # ========================
@@ -26,12 +26,12 @@ compinit -C
 command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
 
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+eval "$(sheldon source)"
 eval "$(zoxide init zsh --cmd j)"
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-fpath=(~/.zsh/zsh-completions/src $fpath)
-source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export FZF_CTRL_R_OPTS="--reverse"
+source <(fzf --zsh)
+bindkey '^g' fzf-file-widget
 
 alias el="eza --icons --git --no-user"
 alias ell="eza -l --icons --git --no-user"
@@ -81,6 +81,7 @@ bindkey -M vicmd 'J' down-line-or-history
 bindkey -M vicmd 'K' up-line-or-history
 bindkey -M vicmd 'U' redo
 bindkey -M vicmd 'x' vi-delete-char
+bindkey '^J' self-insert
 
 \$() {
     if [ $# -eq 0 ]; then
