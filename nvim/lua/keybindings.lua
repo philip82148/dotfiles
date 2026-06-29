@@ -5,41 +5,55 @@ vim.opt.clipboard:append({"unnamed", "unnamedplus"})
 vim.g.mapleader = " "
 
 -- =============================================================================
--- 2. 共通マッピング (Normal & Visual Mode)
+-- 2. 共通マッピング (Normal & Visual, Operator-pending Mode)
 -- =============================================================================
--- ※ vim.keymap.set でモードに {"n", "v"} を指定し、重複を排除
--- ※ デフォルトで remap = false (noremap と同等)
 
 -- [ページ移動] 大文字 J / K で半画面スクロール
-vim.keymap.set({"n", "v"}, "J", "<C-d>")
-vim.keymap.set({"n", "v"}, "K", "<C-u>")
+vim.keymap.set({"n", "x", "o"}, "J", "<C-d>")
+vim.keymap.set({"n", "x", "o"}, "K", "<C-u>")
 
 -- [行内移動] 大文字 L / H で行末 / 行頭へ移動
-vim.keymap.set({"n", "v"}, "L", "$")
-vim.keymap.set({"n", "v"}, "H", "^")
+vim.keymap.set({"n", "x", "o"}, "L", "$")
+vim.keymap.set({"n", "x", "o"}, "H", "^")
 
 -- [対応するカッコへの移動] 大文字 M で % の挙動
-vim.keymap.set({"n", "v"}, "M", "%")
+vim.keymap.set({"n", "x", "o"}, "M", "%")
+
+-- [レジスタを汚さない] 消去したときにレジスタを汚さない
+vim.keymap.set({'n', 'x'}, 'd', '"_d')
+vim.keymap.set('n', 'dd', '"_dd')
+vim.keymap.set({'n', 'x'}, 'D', '"_D')
+vim.keymap.set({'n', 'x'}, 'x', '"_x')
+vim.keymap.set({'n', 'x'}, 'c', '"_c')
+vim.keymap.set('n', 'cc', '"_cc')
+vim.keymap.set({'n', 'x'}, 'C', '"_C')
+
+-- [カット] カットにはsを用いる
+vim.keymap.set({'n', 'x'}, 's', 'd')
+vim.keymap.set({'n', 'x'}, 'ss', 'dd')
+vim.keymap.set({'n', 'x'}, 'S', 'D')
 
 -- [コメントアウト] 行・選択範囲のコメント切り替え
-vim.keymap.set({"n", "v"}, "<Leader>c", "gc", {
+vim.keymap.set({"n", "x"}, "<Leader>c", "gc", {
     remap = true
 })
 
 -- [インデント] インデント調整（調整後もビジュアルモードの選択状態を維持）
-vim.keymap.set({"n", "v"}, ">", ">gv")
-vim.keymap.set({"n", "v"}, "<", "<gv")
+vim.keymap.set({"n", "x"}, ">", ">gv")
+vim.keymap.set({"n", "x"}, "<", "<gv")
 
 -- [コード整形] ファイル全体または選択範囲をLSPでフォーマット
-vim.keymap.set({"n", "v"}, "<Leader>f", function()
+vim.keymap.set({"n", "x"}, "<Leader>f", function()
     vim.lsp.buf.format({
         async = true
     })
 end)
 
 -- [その他の操作] エディタを閉じる / 検索ハイライト消去
-vim.keymap.set({"n", "v"}, "<Leader>w", ":bd<CR>")
-vim.keymap.set({"n", "v"}, "<Leader>z", ":noh<CR>")
+vim.keymap.set({"n", "x"}, "<Leader>w", ":bd<CR>", {
+    silent = true
+})
+vim.keymap.set({"n", "x"}, "<Leader>z", ":noh<CR>")
 
 -- =============================================================================
 -- 3. モード個別マッピング (Mode Specific Settings)
@@ -54,13 +68,6 @@ vim.keymap.set("i", ";;", "<C-n>")
 --- ノーマルモード専用 (Normal Mode Only) ---
 -- [undo/redo] 大文字 U でリドゥ
 vim.keymap.set("n", "U", "<C-r>")
-
--- [削除でレジスタを汚さない] x や s で削除した文字をヤンクしない
-vim.keymap.set("n", "x", '"_x')
-vim.keymap.set("n", "s", '"_d')
-vim.keymap.set("n", "S", '"_D')
-vim.keymap.set("n", "ss", '"_dd')
-
 -- [改行] Enterで直下に空行を挿入してノーマルモードを維持
 vim.keymap.set("n", "<Enter>", "o<Esc>")
 -- [改行] Shift + Enter で直上に空行を挿入してノーマルモードを維持

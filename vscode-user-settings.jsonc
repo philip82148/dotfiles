@@ -1,9 +1,4 @@
 {
-  "window.autoDetectColorScheme": true,
-  "redhat.telemetry.enabled": true,
-  "workbench.activityBar.orientation": "vertical",
-  "workbench.preferredLightColorTheme": "Default Dark Modern",
-  "jdk.telemetry.enabled": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "black-formatter.args": ["--line-length", "119"],
@@ -13,7 +8,6 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
   },
-  "js/ts.updateImportsOnFileMove.enabled": "always",
 
   // =============================================================================
   // 1. 基本設定 (General Settings)
@@ -28,23 +22,24 @@
   // 2. ノーマルモード設定 (Normal Mode Keybindings)
   // =============================================================================
   "vim.normalModeKeyBindingsNonRecursive": [
-    // [ページ移動] 大文字 J / K で半画面スクロール
+    // [ページ移動 / 行内移動 / カッコ移動]
     { "before": ["J"], "after": ["<C-d>"] },
     { "before": ["K"], "after": ["<C-u>"] },
-
-    // [行内移動] 大文字 L / H で行末 / 行頭へ移動
     { "before": ["L"], "after": ["$"] },
     { "before": ["H"], "after": ["^"] },
-
-    // [対応するカッコへの移動] 大文字 M で % の挙動
     { "before": ["M"], "after": ["%"] },
 
-    // [コメントアウト] 行のコメント切り替え
-    { "before": ["<Leader>", "c"], "commands": ["editor.action.commentLine"] },
-
-    // インデント (VSCode標準のインデントコマンドを割り当て)
-    { "before": [">"], "commands": ["editor.action.indentLines"] },
-    { "before": ["<"], "commands": ["editor.action.outdentLines"] },
+    // [レジスタを汚さない消去・カット]
+    { "before": ["d"], "after": ["\"", "_", "d"] },
+    { "before": ["d", "d"], "after": ["\"", "_", "d", "d"] },
+    { "before": ["D"], "after": ["\"", "_", "D"] },
+    { "before": ["x"], "after": ["\"", "_", "x"] },
+    { "before": ["c"], "after": ["\"", "_", "c"] },
+    { "before": ["c", "c"], "after": ["\"", "_", "c", "c"] },
+    { "before": ["C"], "after": ["\"", "_", "C"] },
+    { "before": ["s"], "after": ["d"] },
+    { "before": ["s", "s"], "after": ["d", "d"] },
+    { "before": ["S"], "after": ["D"] },
 
     // [コード整形] ファイル全体の自動フォーマット (VSCodeネイティブ)
     {
@@ -62,15 +57,11 @@
     },
     { "before": ["<Leader>", "z"], "commands": [":noh"] },
 
+    // ノーマルモード専用設定 --------------------------------------------------------------
+
     // [undo/redo] 大文字 U でリドゥ
     { "before": ["u"], "commands": ["undo"] },
     { "before": ["U"], "commands": ["redo"] },
-
-    // [削除でレジスタを汚さない] x や s で削除した文字をヤンクしない
-    { "before": ["x"], "after": ["\"", "_", "x"] },
-    { "before": ["s"], "after": ["\"", "_", "d"] },
-    { "before": ["S"], "after": ["\"", "_", "D"] },
-    { "before": ["s", "s"], "after": ["\"", "_", "d", "d"] },
 
     // [改行] Enterで直下に空行を挿入してノーマルモードを維持
     { "before": ["<Enter>"], "commands": ["editor.action.insertLineAfter"] },
@@ -93,19 +84,21 @@
   // 4. ビジュアルモード設定 (Visual Mode Keybindings)
   // =============================================================================
   "vim.visualModeKeyBindingsNonRecursive": [
-    // <Leader>j でノーマルモードに戻る
-    { "before": ["<Leader>", "j"], "after": ["<Esc>"] },
-
-    // [ページ移動] 大文字 J / K で半画面スクロール
+    // [ページ移動 / 行内移動 / カッコ移動]
     { "before": ["J"], "after": ["<C-d>"] },
     { "before": ["K"], "after": ["<C-u>"] },
-
-    // [行内移動] 大文字 L / H で行末 / 行頭へ移動
     { "before": ["L"], "after": ["$"] },
     { "before": ["H"], "after": ["^"] },
-
-    // [対応するカッコへの移動] 大文字 M で % の挙動
     { "before": ["M"], "after": ["%"] },
+
+    // [レジスタを汚さない消去・カット]
+    { "before": ["d"], "after": ["\"", "_", "d"] },
+    { "before": ["D"], "after": ["\"", "_", "D"] },
+    { "before": ["x"], "after": ["\"", "_", "x"] },
+    { "before": ["c"], "after": ["\"", "_", "c"] },
+    { "before": ["C"], "after": ["\"", "_", "C"] },
+    { "before": ["s"], "after": ["d"] },
+    { "before": ["S"], "after": ["D"] },
 
     // [コメントアウト] 選択範囲のコメント切り替え
     { "before": ["<Leader>", "c"], "commands": ["editor.action.commentLine"] },
@@ -130,13 +123,29 @@
     },
     { "before": ["<Leader>", "z"], "commands": [":noh"] },
 
+    // ビジュアルモード専用設定 ------------------------------------------------------------
+
+    // <Leader>j でノーマルモードに戻る
+    { "before": ["<leader>", "j"], "after": ["<Esc>"] },
+
     // [ペーストでレジスタを汚さない]
     { "before": ["p"], "after": ["\"", "_", "d", "P"] },
+  ],
+
+  "vim.operatorPendingModeKeyBindingsNonRecursive": [
+    // [ページ移動 / 行内移動 / カッコ移動]
+    { "before": ["J"], "after": ["<C-d>"] },
+    { "before": ["K"], "after": ["<C-u>"] },
+    { "before": ["L"], "after": ["$"] },
+    { "before": ["H"], "after": ["^"] },
+    { "before": ["M"], "after": ["%"] },
   ],
 
   // =============================================================================
   // 5. プラグイン・追加機能設定 (Plugin & Features)
   // =============================================================================
+  "vim.surround": true,
+  "vim.targets.enable": true,
   "vim.easymotion": true,
   "vim.visualstar": true,
   "vim.highlightedyank.enable": true,
