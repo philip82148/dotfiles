@@ -72,6 +72,24 @@ alias gclone='git clone'
 alias gremote='git remote'
 alias gsub='git submodule'
 
+bindkey -v
+bindkey -M viins 'jj' vi-cmd-mode
+bindkey -M viins ';;' expand-or-complete
+bindkey -M vicmd 'H' vi-beginning-of-line
+bindkey -M vicmd 'L' vi-end-of-line
+bindkey -M vicmd 'J' down-line-or-history
+bindkey -M vicmd 'K' up-line-or-history
+bindkey -M vicmd 'U' redo
+bindkey -M vicmd 'x' vi-delete-char
+
+\$() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: \$ <command>"
+        return 1
+    fi
+    "$@"
+}
+
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
