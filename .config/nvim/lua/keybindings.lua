@@ -53,6 +53,7 @@ end)
 vim.keymap.set({"n", "x"}, "<Leader>w", ":bd<CR>", {
     silent = true
 })
+vim.keymap.set({"n", "x"}, "<Leader>s", ":w<CR>")
 vim.keymap.set({"n", "x"}, "<Leader>z", ":noh<CR>")
 
 -- =============================================================================

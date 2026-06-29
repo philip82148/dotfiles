@@ -50,10 +50,14 @@
     // [EasyMotion] 拡張モーション
     { "before": ["f"], "after": ["leader", "leader", "leader", "b", "d", "w"] },
 
-    // [その他の操作] エディタを閉じる / 検索ハイライト消去
+    // [その他の操作] エディタを閉じる / ファイル保存 / 検索ハイライト消去
     {
       "before": ["<Leader>", "w"],
       "commands": ["workbench.action.closeActiveEditor"],
+    },
+    {
+      "before": ["<Leader>", "s"],
+      "commands": ["workbench.action.files.save"],
     },
     { "before": ["<Leader>", "z"], "commands": [":noh"] },
 
@@ -116,10 +120,14 @@
     // [EasyMotion] 拡張モーション
     { "before": ["f"], "after": ["leader", "leader", "leader", "b", "d", "w"] },
 
-    // [その他の操作] エディタを閉じる / 検索ハイライト消去
+    // [その他の操作] エディタを閉じる / ファイル保存 / 検索ハイライト消去
     {
       "before": ["<Leader>", "w"],
       "commands": ["workbench.action.closeActiveEditor"],
+    },
+    {
+      "before": ["<Leader>", "s"],
+      "commands": ["workbench.action.files.save"],
     },
     { "before": ["<Leader>", "z"], "commands": [":noh"] },
 

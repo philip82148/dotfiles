@@ -1,6 +1,3 @@
-[user]
-	name = philip82148
-	email = 92205270+philip82148@users.noreply.github.com
 [alias]
     a = add
     c = commit
@@ -25,3 +22,6 @@
     ra = rebase --abort
 [init]
 	defaultBranch = main
+[user]
+	name = philip82148
+	email = 92205270+philip82148@users.noreply.github.com
