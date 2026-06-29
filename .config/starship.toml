@@ -543,12 +543,12 @@ disabled = false
 [git_status]
 format = '([$ahead_behind](blue) )([$all_status](yellow) )'
 style = "green"
-stashed = '\$'
+stashed = '\$${count}'
 ahead = "0|${count}"
 behind = "${count}|0"
 up_to_date = ""
 diverged = "${behind_count}|${ahead_count}"
-conflicted = "="
+conflicted = "=${count}"
 deleted = "✘${count}"
 renamed = "»${count}"
 modified = "!${count}"
