@@ -103,4 +103,7 @@ return {{
         end,
         desc = "Flash"
     }}
+}, {
+    "aronjohanns/smooth-resize.nvim",
+    opts = {}
 }}
