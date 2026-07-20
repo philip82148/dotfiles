@@ -48,11 +48,19 @@ brew bundle dump -f --no-describe --no-vscode
 ### Mac
 
 ```sh
-cat mac.zshrc > ~/.zshrc
+sed -n '/# COMMON START/,/# COMMON END/p' ~/.zshrc > common.zshrc
+
+sed '/# COMMON START/,$d' ~/.zshrc > mac.zshrc
+echo "# INSERT COMMON" >> mac.zshrc
+sed '1,/# COMMON END/d' ~/.zshrc >> mac.zshrc
 ```
 
 ### WSL
 
 ```sh
-cat wsl.zshrc > ~/.zshrc
+sed -n '/# COMMON START/,/# COMMON END/p' ~/.zshrc > common.zshrc
+
+sed '/# COMMON START/,$d' ~/.zshrc > wsl.zshrc
+echo "# INSERT COMMON" >> wsl.zshrc
+sed '1,/# COMMON END/d' ~/.zshrc >> wsl.zshrc
 ```
