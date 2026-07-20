@@ -1,6 +1,11 @@
 {
+  "files.insertFinalNewline": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.prettier": "explicit",
+    "source.organizeImports": "explicit",
+  },
   "black-formatter.args": ["--line-length", "119"],
   "isort.args": ["--profile", "black", "--line-length", "119"],
   "flake8.args": ["--extend-ignore", "E203", "--max-line-length", "119"],
@@ -48,7 +53,7 @@
     },
 
     // [EasyMotion] 拡張モーション
-    { "before": ["f"], "after": ["leader", "leader", "leader", "b", "d", "w"] },
+    { "before": ["m"], "after": ["leader", "leader", "leader", "b", "d", "w"] },
 
     // [その他の操作] エディタを閉じる / ファイル保存 / 検索ハイライト消去
     {
@@ -58,6 +63,13 @@
     {
       "before": ["<Leader>", "s"],
       "commands": ["workbench.action.files.save"],
+    },
+    {
+      "before": ["<Leader>", "x"],
+      "commands": [
+        "workbench.action.files.save",
+        "workbench.action.closeActiveEditor",
+      ],
     },
     { "before": ["<Leader>", "z"], "commands": [":noh"] },
 
@@ -78,8 +90,8 @@
   // 3. インサートモード設定 (Insert Mode Keybindings)
   // =============================================================================
   "vim.insertModeKeyBindingsNonRecursive": [
-    // jj でノーマルモードに戻る
-    { "before": ["j", "j"], "after": ["<Esc>"] },
+    // jk でノーマルモードに戻る
+    { "before": ["j", "k"], "after": ["<Esc>"] },
     // ;; で補完を起動
     { "before": [";", ";"], "commands": ["editor.action.triggerSuggest"] },
   ],
@@ -118,7 +130,7 @@
     },
 
     // [EasyMotion] 拡張モーション
-    { "before": ["f"], "after": ["leader", "leader", "leader", "b", "d", "w"] },
+    { "before": ["m"], "after": ["leader", "leader", "leader", "b", "d", "w"] },
 
     // [その他の操作] エディタを閉じる / ファイル保存 / 検索ハイライト消去
     {
@@ -128,6 +140,13 @@
     {
       "before": ["<Leader>", "s"],
       "commands": ["workbench.action.files.save"],
+    },
+    {
+      "before": ["<Leader>", "x"],
+      "commands": [
+        "workbench.action.files.save",
+        "workbench.action.closeActiveEditor",
+      ],
     },
     { "before": ["<Leader>", "z"], "commands": [":noh"] },
 

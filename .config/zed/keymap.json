@@ -1,0 +1,164 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    },
+  },
+  // =============================================================================
+  // ノーマルモード設定 (Normal Mode)
+  // =============================================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // ページ移動 / 行内移動 / カッコ移動
+      "j": "vim::Down", // Jが大文字なので、VSCode側で C-d だった場合は "shift-j" になります
+      "shift-j": "vim::ScrollDown",
+      "shift-k": "vim::ScrollUp",
+      "shift-l": "vim::EndOfLine",
+      "shift-h": "vim::FirstNonWhitespace",
+      "shift-m": "vim::Matching",
+
+      // 通常の削除・切り取り（レジスタ固定は標準動作を優先）
+      "s": "vim::DeleteLeft",
+      "shift-s": "vim::DeleteToEndOfLine",
+
+      // undo / redo
+      "u": "editor::Undo",
+      "shift-u": "editor::Redo",
+
+      // 改行 (Enterで下に空行)
+      "shift-enter": "editor::NewlineAbove",
+      "enter": "editor::NewlineBelow",
+
+      // Leaderキー（Space）を起点とするカスタムコマンド
+      "space f": "editor::Format",
+      "space w": "pane::CloseActiveItem",
+      "space s": "workspace::Save",
+      // "space x": ["workspace::Save", "pane::CloseActiveItem"],
+      // "space z": "search::", // 検索ハイライト消去の代替
+    },
+  },
+
+  // =============================================================================
+  // インサートモード設定 (Insert Mode)
+  // =============================================================================
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "j k": "vim::NormalBefore", // jk でノーマルモードに戻る
+      "; ;": "editor::ShowCompletions", // 補完を起動
+    },
+  },
+
+  // =============================================================================
+  // ビジュアルモード設定 (Visual Mode)
+  // =============================================================================
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      // 移動
+      "shift-j": "vim::PageDown",
+      "shift-k": "vim::PageUp",
+      "shift-l": "vim::EndOfLine",
+      "shift-h": "vim::FirstNonWhitespace",
+      "shift-m": "vim::Matching",
+
+      // コメントアウト
+      "space c": "editor::ToggleComments",
+
+      // インデント調整
+      ">": "editor::Indent",
+      "<": "editor::Outdent",
+
+      // 選択範囲フォーマット
+      "space f": "editor::Format",
+
+      // 共通操作
+      "space w": "pane::CloseActiveItem",
+      "space s": "workspace::Save",
+      // "space x": ["workspace::Save", "pane::CloseActiveItem"],
+
+      // ノーマルモードに戻る
+      "space j": "vim::NormalBefore",
+    },
+  },
+  // =============================================================================
+  // グローバル / エディタフォーカス時の設定
+  // =============================================================================
+  {
+    "context": "Workspace",
+    "bindings": {
+      // タブ（エディタ）の切り替え
+      "ctrl-h": "pane::ActivatePreviousItem",
+      "ctrl-l": "pane::ActivateNextItem",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // ターミナルのトグル（エディタにいる時に押すと開く）
+      "ctrl-t": "workspace::ToggleBottomDock",
+      "ctrl-h": "pane::ActivatePreviousItem",
+      "ctrl-l": "pane::ActivateNextItem",
+
+      // Shift+Enterで上に空行を挿入（Vimのビジュアルモード以外という条件を内包）
+      "shift-enter": "editor::NewlineAbove",
+    },
+  },
+
+  // =============================================================================
+  // 補完メニュー（メニューポップアップ）表示時
+  // =============================================================================
+  {
+    "context": "Editor && menu",
+    "bindings": {
+      // 補完候補を Ctrl+j / Ctrl+k で上下に選択
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-k": "menu::SelectPrevious",
+    },
+  },
+
+  // =============================================================================
+  // プロジェクト検索 / ファイル検索 (QuickOpen / Project Search)
+  // =============================================================================
+  {
+    "context": "BufferSearchBar || ProjectSearchBar || FileFinder",
+    "bindings": {
+      // 検索結果やファイル候補を Ctrl+j / Ctrl+k で上下に選択
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-k": "menu::SelectPrevious",
+    },
+  },
+
+  // =============================================================================
+  // ターミナルフォーカス時
+  // =============================================================================
+  {
+    "context": "Terminal",
+    "bindings": {
+      // ターミナルフォーカス時に Ctrl+t を押すとエディタ（アクティブグループ）にフォーカスを戻す
+      "ctrl-t": "workspace::ActivatePreviousPane",
+    },
+  },
+
+  // =============================================================================
+  // ファイルツリー / リストフォーカス時（Vimライクな移動）
+  // =============================================================================
+  {
+    "context": "ProjectPanel && !menu",
+    "bindings": {
+      "j": "menu::SelectNext", // 下に移動
+      "k": "menu::SelectPrevious", // 上に移動
+      "h": "project_panel::CollapseSelectedEntry", // ディレクトリを閉じる
+      "l": "project_panel::OpenPermanent", // ファイルを開く / ディレクトリを展開
+    },
+  },
+]
