@@ -52,7 +52,13 @@ return { {
 }, {
   'akinsho/toggleterm.nvim',
   version = "*",
-  config = true
+  config = function()
+    require("toggleterm").setup({
+      open_mapping = [[<C-t>]],
+      insert_mappings = true,
+      terminal_mappings = true,
+    })
+  end,
 }, {
   'windwp/nvim-autopairs',
   event = "InsertEnter",
