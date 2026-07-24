@@ -13,7 +13,7 @@ install_vscode_extensions() {
   _install_ext() {
     local ext="$1"
     echo "  -> Installing extension: $ext"
-    code --install-extension "$ext"
+    code --install-extension "$ext" >/dev/null
   }
 
   read_config_list "$ext_file" _install_ext
