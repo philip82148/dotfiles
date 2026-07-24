@@ -1,0 +1,5 @@
+cmux
+ghostty
+nvim
+sheldon
+starship.toml

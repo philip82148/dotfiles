@@ -1,0 +1,10 @@
+donjayamanne.githistory
+eamodio.gitlens
+esbenp.prettier-vscode
+formulahendry.code-runner
+ms-python.black-formatter
+ms-python.flake8
+ms-python.isort
+ms-python.python
+streetsidesoftware.code-spell-checker
+vscodevim.vim

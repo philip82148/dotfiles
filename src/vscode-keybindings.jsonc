@@ -1,4 +1,5 @@
 [
+  // COMMON START
   {
     "key": "ctrl+h",
     "command": "workbench.action.previousEditor",
@@ -72,4 +73,5 @@
     "command": "list.select",
     "when": "listFocus && !inputFocus",
   },
+  // COMMON END
 ]

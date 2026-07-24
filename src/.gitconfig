@@ -1,3 +1,4 @@
+# COMMON START
 [alias]
     a = add
     c = commit
@@ -21,7 +22,8 @@
     rc = rebase --continue
     ra = rebase --abort
 [init]
-	defaultBranch = main
+    defaultBranch = main
+# COMMON END
 [user]
-	name = philip82148
-	email = 92205270+philip82148@users.noreply.github.com
+    name = philip82148
+    email = 92205270+philip82148@users.noreply.github.com

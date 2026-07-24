@@ -1,0 +1,2 @@
+gh
+nvim/lazy-lock.json
