@@ -13,7 +13,7 @@ read_config_list() {
     [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
     local target=$(echo "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
     "$callback_func" "$target"
-  done < "$file_path"
+  done <"$file_path"
 }
 
 # --- 汎用: COMMONブロック挿入・置換関数 (Install用) ---
@@ -54,14 +54,14 @@ inject_common_block() {
   local safe_end="${end_marker//\//\\/}"
 
   # src から COMMON ブロックを抽出
-  sed -n "/${safe_start}/,/${safe_end}/p" "$src_file" > "$common_tmp"
+  sed -n "/${safe_start}/,/${safe_end}/p" "$src_file" >"$common_tmp"
 
   # ターゲットファイルの COMMON START より前を出力
-  sed "/${safe_start}|,\$d" "$target_file" > "$tmp_file"
+  sed "/${safe_start}/,\$d" "$target_file" >"$tmp_file"
   # 抽出した COMMON ブロックを結合
-  cat "$common_tmp" >> "$tmp_file"
+  cat "$common_tmp" >>"$tmp_file"
   # ターゲットファイルの COMMON END より後を出力
-  sed "1,/${safe_end}/d" "$target_file" >> "$tmp_file"
+  sed "1,/${safe_end}/d" "$target_file" >>"$tmp_file"
 
   mv "$tmp_file" "$target_file"
   rm -f "$common_tmp"
@@ -87,7 +87,7 @@ extract_common() {
   local safe_start="${start_marker//\//\\/}"
   local safe_end="${end_marker//\//\\/}"
   # マーカーで囲まれた行のみを抽出
-  sed -n "/${safe_start}/,/${safe_end}/p" "$target_file" > "$output_file"
+  sed -n "/${safe_start}/,/${safe_end}/p" "$target_file" >"$output_file"
   [[ -s "$output_file" ]] && return 0 || return 1
 }
 
@@ -128,9 +128,9 @@ export_common_block() {
     local safe_start="${start_marker//\//\\/}"
     local safe_end="${end_marker//\//\\/}"
     local tmp_file=$(mktemp)
-    sed "/${safe_start}/,\$d" "$output_file" > "$tmp_file"
-    cat "$common_tmp" >> "$tmp_file"
-    sed "1,/${safe_end}/d" "$output_file" >> "$tmp_file"
+    sed "/${safe_start}/,\$d" "$output_file" >"$tmp_file"
+    cat "$common_tmp" >>"$tmp_file"
+    sed "1,/${safe_end}/d" "$output_file" >>"$tmp_file"
     mv "$tmp_file" "$output_file"
   fi
 

@@ -38,18 +38,18 @@ _export_jsonc_common() {
   local vscode_path="" cursor_path=""
 
   case "$os_type" in
-    "mac")
-      vscode_path="$HOME/Library/Application Support/Code/User/$file_name"
-      cursor_path="$HOME/Library/Application Support/Cursor/User/$file_name"
-      ;;
-    "wsl")
-      vscode_path="$HOME/.config/Code/User/$file_name"
-      cursor_path="$HOME/.config/Cursor/User/$file_name"
-      ;;
-    *)
-      echo "⚠️  Unknown OS. Skipping $label export."
-      return 0
-      ;;
+  "mac")
+    vscode_path="$HOME/Library/Application Support/Code/User/$file_name"
+    cursor_path="$HOME/Library/Application Support/Cursor/User/$file_name"
+    ;;
+  "wsl")
+    vscode_path="$HOME/.config/Code/User/$file_name"
+    cursor_path="$HOME/.config/Cursor/User/$file_name"
+    ;;
+  *)
+    echo "⚠️  Unknown OS. Skipping $label export."
+    return 0
+    ;;
   esac
 
   local tmp_vscode_out=$(mktemp)
