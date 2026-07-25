@@ -11,18 +11,18 @@ source ./scripts/tasks/brew.sh
 source ./scripts/tasks/zsh.sh
 
 check_current_dir
-echo "🚀 Starting dotfiles export..."
+echo "🚀 Starting dotfiles import..."
 
 mkdir -p src
 
 OS_TYPE=$(get_os_type)
 
-export_gitconfig
-export_config_files
+import_gitconfig
+import_config_files
 clean_ignored_configs
-export_vscode_keybindings "$OS_TYPE"
-export_vscode_settings "$OS_TYPE"
-export_brewfile
-export_zshrc "$OS_TYPE"
+import_vscode_keybindings "$OS_TYPE"
+import_vscode_settings "$OS_TYPE"
+import_brewfile
+import_zshrc "$OS_TYPE"
 
-echo "✅ Export complete!"
+echo "✅ Import complete!"

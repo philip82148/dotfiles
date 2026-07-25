@@ -1,20 +1,22 @@
 #!/usr/bin/env zsh
 
-install_gitconfig() {
+# --- Gitconfig ---
+update_gitconfig() {
   echo "📋 Setting up ~/.gitconfig..."
   inject_common_block "$HOME/.gitconfig" "src/.gitconfig" "#"
 }
 
-export_gitconfig() {
-  echo "📄 Exporting ~/.gitconfig COMMON block..."
-  if export_common_block "$HOME/.gitconfig" "src/.gitconfig" "#"; then
-    echo "✅ Exported .gitconfig COMMON block to src/.gitconfig"
+import_gitconfig() {
+  echo "📄 Importing ~/.gitconfig COMMON block..."
+  if import_common_block "$HOME/.gitconfig" "src/.gitconfig" "#"; then
+    echo "✅ Imported .gitconfig COMMON block to src/.gitconfig"
   else
     echo "⚠️  No '# COMMON START' block found in ~/.gitconfig. Skipping."
   fi
 }
 
-install_config_files() {
+# --- ~/.config Directory ---
+update_config_files() {
   echo "📦 Copying ~/.config items..."
   local include_file="config/config-include.txt"
 
@@ -33,13 +35,13 @@ install_config_files() {
   fi
 }
 
-export_config_files() {
+import_config_files() {
   local include_file="config/config-include.txt"
 
   if [[ -f "$include_file" ]]; then
-    echo "📦 Exporting specified ~/.config items from $include_file..."
+    echo "📦 Importing specified ~/.config items from $include_file..."
     mkdir -p src/.config
-    _export_item() {
+    _import_item() {
       local item="$1"
       if [[ -d "$HOME/.config/$item" || -f "$HOME/.config/$item" ]]; then
         echo "  -> Copying ~/.config/$item"
@@ -47,7 +49,7 @@ export_config_files() {
         cp -r "$HOME/.config/$item" "src/.config/$item"
       fi
     }
-    read_config_list "$include_file" _export_item
+    read_config_list "$include_file" _import_item
   else
     echo "⚠️  $include_file not found. Copying all ~/.config..."
     cp -r ~/.config src/

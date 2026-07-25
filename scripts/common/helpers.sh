@@ -16,7 +16,7 @@ read_config_list() {
   done <"$file_path"
 }
 
-# --- 汎用: COMMONブロック挿入・置換関数 (Install用) ---
+# --- 汎用: COMMONブロック挿入・置換関数 (Update用) ---
 inject_common_block() {
   local target_file="$1"         # 適用先 (例: ~/.gitconfig, settings.json)
   local src_file="$2"            # 参照元 (例: src/.gitconfig, src/vscode-user-settings.jsonc)
@@ -67,7 +67,7 @@ inject_common_block() {
   rm -f "$common_tmp"
 }
 
-# 補助関数: 純粋にマーカー区間テキストを一時ファイル等に抽出する
+# 補助関数: 純粋にマーカー区間テキストを抽出する
 extract_common() {
   local target_file="$1"         # 読み取り元 (例: ~/.gitconfig, settings.json)
   local output_file="$2"         # 保存先 (例: src/.gitconfig, src/vscode-user-settings.jsonc)
@@ -91,8 +91,8 @@ extract_common() {
   [[ -s "$output_file" ]] && return 0 || return 1
 }
 
-# --- 汎用: COMMONブロック抽出・置換関数 (Export用) ---
-export_common_block() {
+# --- 汎用: COMMONブロック抽出・置換関数 (Import用) ---
+import_common_block() {
   local target_file="$1"         # 読み取り元実機ファイル (例: ~/.gitconfig)
   local output_file="$2"         # 保存先リポジトリファイル (例: src/.gitconfig)
   local comment_prefix="${3:-#}" # コメント記号 (# または //)
@@ -111,7 +111,7 @@ export_common_block() {
 
   # 2. 保存先ファイルが既に存在する場合、保存先側にもマーカーがあるかチェック
   if [[ -f "$output_file" ]] && ! grep -qF "${start_marker}" "$output_file"; then
-    echo "❌ Error: Export target file '$output_file' exists but lacks '${start_marker}' marker."
+    echo "❌ Error: Import target file '$output_file' exists but lacks '${start_marker}' marker."
     echo "   Please add '${start_marker}' and '${end_marker}' to '$output_file' first."
     exit 1
   fi
@@ -136,4 +136,51 @@ export_common_block() {
 
   rm -f "$common_tmp"
   return 0
+}
+
+# --- エディタパス取得ヘルパー ---
+get_editor_user_dir() {
+  local target_os="$1"     # mac または wsl
+  local target_editor="$2" # Code または Cursor
+  local config_file="config/editor-paths.txt"
+
+  if [[ ! -f "$config_file" ]]; then
+    return 1
+  fi
+
+  # 検索用キーの作成 (例: mac + cursor -> MAC_CURSOR_DIR)
+  local os_upper="${(U)target_os}"
+  local editor_upper="${(U)target_editor}"
+  local target_key="${os_upper}_${editor_upper}_DIR"
+
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    # 空行やコメント行を無視
+    [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
+
+    # '=' が含まれていない行をスキップ
+    [[ "$line" != *"="* ]] && continue
+
+    # KEY=VALUE の分割
+    local key="${line%%=*}"
+    local raw_path="${line#*=}"
+
+    # 前後の空白除去
+    key=$(echo "$key" | xargs)
+    raw_path=$(echo "$raw_path" | xargs)
+
+    # シングルクォートやダブルクォートが端にあれば除去
+    raw_path="${raw_path#[\'\"]}"
+    raw_path="${raw_path%[\'\"]}"
+
+    if [[ "$key" == "$target_key" ]]; then
+      # $HOME または ~ を現在の環境変数で置換して展開
+      local expanded_path="${raw_path/\$HOME/$HOME}"
+      expanded_path="${expanded_path/#\~/$HOME}"
+
+      echo "$expanded_path"
+      return 0
+    fi
+  done <"$config_file"
+
+  return 1
 }

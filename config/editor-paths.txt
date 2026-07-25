@@ -1,0 +1,5 @@
+# OS_EDITOR_DIR=path
+MAC_CODE_DIR=$HOME/Library/Application Support/Code/User
+MAC_CURSOR_DIR=$HOME/Library/Application Support/Cursor/User
+WSL_CODE_DIR=/mnt/c/Users/ssk70/AppData/Roaming/Code/User
+WSL_CURSOR_DIR=/mnt/c/Users/ssk70/AppData/Roaming/Cursor/User

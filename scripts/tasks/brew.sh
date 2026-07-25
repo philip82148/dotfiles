@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-export_brewfile() {
+import_brewfile() {
   if command -v brew >/dev/null 2>&1; then
     echo "🍺 Dumping Homebrew packages..."
     brew bundle dump -f --no-describe --no-vscode --file=src/Brewfile

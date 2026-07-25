@@ -18,9 +18,9 @@ setup_zshrc() {
   esac
 }
 
-export_zshrc() {
+import_zshrc() {
   local os_type="$1"
-  echo "🔍 Exporting .zshrc for $os_type..."
+  echo "🔍 Importing .zshrc for $os_type..."
   local target_zshrc_dir="src/.zshrc"
   mkdir -p "$target_zshrc_dir"
 
